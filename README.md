@@ -297,13 +297,125 @@ npm run lint
 
 ## 🤝 Contributing
 
-This is a personal learning project, but suggestions and feedback are welcome!
+We welcome contributions from the team! Please follow our development workflow:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### 📚 Documentation
+
+- **[SETUP.md](SETUP.md)** - Complete environment setup guide for new contributors
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Detailed contribution guidelines and workflow
+- **[docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)** - Comprehensive testing instructions
+
+### 🔄 Development Workflow
+
+1. **Get Access**
+   - Request collaborator access from @PavelDetvan
+   - Clone the repository
+
+2. **Set Up Environment**
+   - Follow [SETUP.md](SETUP.md) for complete setup instructions
+   - Install dependencies: `npm install`
+   - Configure `.env.local` with Supabase credentials
+   - Run dev server: `npm run dev`
+
+3. **Create Feature Branch**
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout -b feature/your-username/description
+   ```
+   
+   **Branch naming:**
+   - Features: `feature/username/add-dark-mode`
+   - Bug fixes: `bugfix/username/fix-counter-increment`
+   - Documentation: `docs/username/update-readme`
+
+4. **Make Changes**
+   - Write clean, documented code
+   - Follow existing code style
+   - Test your changes thoroughly
+   - Commit with descriptive messages
+
+5. **Push & Create Pull Request**
+   ```bash
+   git add .
+   git commit -m "feat: add dark mode toggle"
+   git push origin feature/your-username/description
+   ```
+   - Go to GitHub and create a Pull Request
+   - Fill out the PR template (auto-populated)
+   - Request review from @PavelDetvan
+
+6. **Code Review**
+   - Address review feedback
+   - Update PR with requested changes
+   - Once approved, PR will be merged
+
+7. **Auto-Deploy**
+   - Merging to `main` triggers automatic Vercel deployment
+   - Changes go live within 2-3 minutes
+
+### 🛡️ Branch Protection
+
+The `main` branch is protected:
+- ✅ Direct pushes are blocked
+- ✅ Pull requests required for all changes
+- ✅ 1 approval required before merge
+- ✅ Admin (@PavelDetvan) can bypass for urgent fixes
+- ✅ Keeps production stable
+
+### 📋 Issue Templates
+
+When reporting bugs or requesting features, use GitHub issue templates:
+
+- **🐛 Bug Report** - Structured bug reporting with reproduction steps
+- **💡 Feature Request** - Propose new features with use cases
+
+### 🚀 Deployment Process
+
+**Production:** https://counter-app-eight-liart.vercel.app
+
+1. **Feature Branches** → Preview deployment (auto-generated URL)
+2. **Pull Request** → Review changes on preview
+3. **Merge to Main** → Automatic production deployment
+4. **Live in ~2 minutes** → Changes visible to users
+
+**Environment:**
+- **Platform:** Vercel
+- **Auto-deploy:** Enabled for `main` branch
+- **Preview deployments:** Enabled for all branches
+- **Domain:** counter-app-eight-liart.vercel.app
+
+### ✅ Commit Message Format
+
+Follow Conventional Commits:
+
+```
+<type>: <description>
+
+[optional body]
+
+[optional footer]
+```
+
+**Types:**
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation changes
+- `style:` - Code style/formatting
+- `refactor:` - Code refactoring
+- `test:` - Adding tests
+- `chore:` - Maintenance tasks
+
+**Examples:**
+```bash
+feat: add dark mode toggle to settings
+fix: counter increment not updating database
+docs: update SETUP.md with troubleshooting
+style: format code with Prettier
+refactor: simplify counter state management
+```
+
+📖 **See [CONTRIBUTING.md](CONTRIBUTING.md) for complete guidelines!**
 
 ## 📄 License
 
