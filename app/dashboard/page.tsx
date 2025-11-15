@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { useCounterStore } from '@/store/counterStore';
 import { supabase } from '@/lib/supabase/client';
-import { LogOut, Plus } from 'lucide-react';
+import { LogOut, Plus, Package } from 'lucide-react';
 import CounterCard from '@/components/CounterCard';
 import CreateCounterModal from '@/components/CreateCounterModal';
+import Link from 'next/link';
 
 /**
  * Dashboard Page
@@ -72,6 +73,14 @@ export default function DashboardPage() {
 
             {/* User Info & Logout */}
             <div className="flex items-center gap-4">
+              <Link
+                href="/releases"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                title="Release Notes"
+              >
+                <Package size={18} />
+                <span className="hidden sm:inline">Releases</span>
+              </Link>
               <span className="text-sm text-gray-600 hidden sm:block">
                 {user.email}
               </span>

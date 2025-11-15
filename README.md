@@ -25,6 +25,14 @@ A modern Progressive Web App (PWA) for tracking daily activities and habits. Bui
 - **Form Validation** - Helpful error messages and loading states
 - **Responsive Design** - Works perfectly on mobile, tablet, and desktop
 
+**User Feedback & Documentation:**
+- **Feedback System** - Floating feedback button for logged-in users
+- **Bug Reports** - Submit bug reports directly from the app
+- **Feature Requests** - Request new features and improvements
+- **General Feedback** - Share thoughts and suggestions
+- **Release Notes** - Beautiful timeline page showing version history
+- **Version Tracking** - See all updates, features, and bug fixes
+
 ### 🚧 Coming Next (Phase 3)
 - Edit counter functionality
 - Delete/archive counters with confirmation
@@ -54,6 +62,7 @@ counter_app/
 │   │   ├── login/           # Login page
 │   │   └── signup/          # Signup page
 │   ├── dashboard/           # Dashboard page (protected)
+│   ├── releases/            # Release notes page
 │   ├── layout.tsx           # Root layout with metadata
 │   ├── page.tsx             # Landing page
 │   └── globals.css          # Global styles
@@ -65,9 +74,13 @@ counter_app/
 ├── hooks/                   # Custom React hooks
 │   └── useAuth.ts          # Authentication hook
 ├── components/              # Reusable UI components
-│   └── CounterCard.tsx     # Counter display card
+│   ├── CounterCard.tsx     # Counter display card
+│   ├── CreateCounterModal.tsx  # Counter creation modal
+│   └── FeedbackButton.tsx  # Floating feedback button
 ├── store/                   # Zustand stores
 │   └── counterStore.ts     # Counter state management
+├── data/                    # Static data files
+│   └── releases.ts          # Version history data
 ├── docs/                    # Project documentation
 │   ├── README.md           # Original project vision
 │   ├── planning.md         # Project planning
@@ -107,6 +120,15 @@ counter_app/
 - `timestamp` (TIMESTAMPTZ) - When the entry was created
 - `note` (TEXT, optional) - Additional context
 - `synced` (BOOLEAN) - For offline sync support (future)
+
+**feedback**
+- `id` (UUID, PK)
+- `user_id` (UUID, FK → profiles, nullable)
+- `user_email` (TEXT, optional) - User's email for follow-up
+- `feedback_type` (TEXT) - Type: 'bug', 'feature', or 'general'
+- `message` (TEXT) - Feedback content
+- `status` (TEXT) - Status: 'new', 'reviewed', or 'resolved'
+- `created_at` (TIMESTAMPTZ)
 
 ### Security
 
@@ -200,9 +222,14 @@ Performance indexes created for common queries:
 - [x] Today's count badge on each counter
 - [x] Form validation with character counters
 - [x] Loading states and error handling
-- [x] ~850 lines of production code added
-- [x] 35+ test cases passing
-- [x] 4 critical bugs fixed
+- [x] Floating feedback button (logged-in users only)
+- [x] Bug report, feature request, and general feedback forms
+- [x] Feedback stored in Supabase database
+- [x] Release notes page with version timeline
+- [x] Navigation links to releases from dashboard
+- [x] ~1200 lines of production code added
+- [x] All test cases passing
+- [x] Zero console errors
 
 ### Phase 3: Advanced Counter Management (Next Up)
 - [ ] Edit counter functionality  

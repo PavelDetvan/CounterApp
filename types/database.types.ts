@@ -96,6 +96,35 @@ export interface Database {
           synced?: boolean
         }
       }
+      feedback: {
+        Row: {
+          id: string
+          user_id: string | null
+          user_email: string | null
+          feedback_type: 'bug' | 'feature' | 'general'
+          message: string
+          status: 'new' | 'reviewed' | 'resolved'
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          user_email?: string | null
+          feedback_type: 'bug' | 'feature' | 'general'
+          message: string
+          status?: 'new' | 'reviewed' | 'resolved'
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          user_email?: string | null
+          feedback_type?: 'bug' | 'feature' | 'general'
+          message?: string
+          status?: 'new' | 'reviewed' | 'resolved'
+          created_at?: string
+        }
+      }
     }
   }
 }
@@ -104,7 +133,9 @@ export interface Database {
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Counter = Database['public']['Tables']['counters']['Row']
 export type CounterEntry = Database['public']['Tables']['counter_entries']['Row']
+export type Feedback = Database['public']['Tables']['feedback']['Row']
 
 export type NewCounter = Database['public']['Tables']['counters']['Insert']
 export type NewCounterEntry = Database['public']['Tables']['counter_entries']['Insert']
+export type NewFeedback = Database['public']['Tables']['feedback']['Insert']
 export type UpdateCounter = Database['public']['Tables']['counters']['Update']

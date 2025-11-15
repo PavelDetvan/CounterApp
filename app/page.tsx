@@ -77,6 +77,16 @@ export default function Home() {
             Sign In
           </Link>
         </div>
+
+        {/* Footer */}
+        <footer className="mt-24 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-gray-600">
+            <span>© 2024 CounterApp</span>
+            <Link href="/releases" className="hover:text-blue-600 transition-colors">
+              Release Notes
+            </Link>
+          </div>
+        </footer>
       </div>
     </div>
   );
