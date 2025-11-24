@@ -33,12 +33,16 @@ Successfully implemented the foundation of CounterApp with full authentication a
   - Today's activity badge
   - Increment (+1) button
   - Decrement (-1) button
-  - Edit/Delete icons (placeholders)
+  - Edit button (fully functional)
+  - Delete button (fully functional)
   - Creation date footer
 - [x] Real-time counter updates
 - [x] Instant UI refresh after operations
 - [x] Total count calculation
 - [x] Today's count tracking
+- [x] Edit counter functionality with modal dialog
+- [x] Delete counter with confirmation dialog
+- [x] Soft delete (archive) system
 
 ### Technical Implementation
 - [x] Next.js 15 with App Router
@@ -84,15 +88,29 @@ Successfully implemented the foundation of CounterApp with full authentication a
    - Sign up with any email
 
 3. **Create a test counter:**
-   - In Supabase Dashboard → Table Editor → `counters`
-   - Insert a new row with your `user_id`
-   - Refresh dashboard
+   - Click "Add Counter" button
+   - Fill in name (e.g., "Test Counter")
+   - Choose a color
+   - Add optional description and emoji
+   - Click "Create Counter"
 
 4. **Test increment/decrement:**
    - Click "+1" multiple times
    - Watch the count update instantly
    - Click "-1" to decrease
    - See the "today" badge update
+
+5. **Test edit functionality:**
+   - Click the edit icon (pencil) on any counter
+   - Modify name, description, color, or icon
+   - Click "Save Changes"
+   - See updates reflected immediately
+
+6. **Test delete functionality:**
+   - Click the delete icon (trash) on any counter
+   - Review the confirmation dialog
+   - Click "Delete Counter" to confirm
+   - Counter is archived and removed from view
 
 ### Full Test Suite
 
@@ -110,30 +128,28 @@ See [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md) for comprehensive testing ins
 
 ### Priority Features
 
-1. **Create Counter Form** (Next Up!)
-   - Modal dialog with form
-   - Name and description inputs
-   - Color picker
-   - Icon selector (optional)
-   - Form validation with Zod
-
-2. **Edit Counter**
-   - Click edit icon on card
-   - Open form with existing data
-   - Update counter properties
-   - Save changes
-
-3. **Delete Counter**
-   - Click delete icon
-   - Confirmation dialog
-   - Archive counter (soft delete)
-   - Remove from view
-
-4. **Basic Statistics**
+1. **Basic Statistics** (Next Up!)
    - Summary cards at top of dashboard
    - Total counters
    - Today's total increments
    - Most active counter
+   - Weekly/monthly trends
+
+2. **Counter History**
+   - View all entries for a counter
+   - Timeline visualization
+   - Edit/delete individual entries
+   - Export history data
+
+3. **Search and Filter**
+   - Search counters by name
+   - Filter by color or activity
+   - Sort options (name, date, count)
+
+4. **PWA Features**
+   - Install as app
+   - Offline support
+   - Push notifications (optional)
 
 ### Estimated Time
 Phase 2: 2-3 hours of development
@@ -146,15 +162,16 @@ Phase 2: 2-3 hours of development
 - ✅ 100% of authentication flows
 - ✅ 100% of counter display features
 - ✅ 100% of increment/decrement operations
+- ✅ 100% of create/edit/delete operations (full CRUD)
 - ✅ 100% of data persistence
 - ✅ Responsive on all screen sizes
+- ✅ Form validation and error handling
 
 ### Known Limitations
-- ⚠️ "Add Counter" button not functional yet
-- ⚠️ Edit/Delete icons are placeholders
 - ⚠️ No statistics view yet
 - ⚠️ No counter search/filter
 - ⚠️ No PWA features yet
+- ⚠️ No data export functionality
 
 ---
 
