@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus, Minus, Trash2, Edit } from 'lucide-react';
+import { Plus, Minus, Trash2, Edit, BarChart3 } from 'lucide-react';
 import type { Counter } from '@/types/database.types';
 
 /**
@@ -14,6 +14,7 @@ interface CounterCardProps {
   onDecrement: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
+  onViewDetails?: () => void;
 }
 
 export default function CounterCard({
@@ -22,6 +23,7 @@ export default function CounterCard({
   onDecrement,
   onEdit,
   onDelete,
+  onViewDetails,
 }: CounterCardProps) {
   return (
     <div
@@ -108,9 +110,20 @@ export default function CounterCard({
 
       {/* Card Footer - Metadata */}
       <div className="px-6 py-3 bg-gray-50 rounded-b-xl border-t border-gray-100">
-        <div className="flex justify-between items-center text-xs text-gray-500">
-          <span>Created {new Date(counter.created_at).toLocaleDateString()}</span>
-          {counter.icon && <span className="text-lg">{counter.icon}</span>}
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-gray-500">
+            Created {new Date(counter.created_at).toLocaleDateString()}
+          </span>
+          {onViewDetails && (
+            <button
+              onClick={onViewDetails}
+              className="flex items-center gap-1 px-2 py-1 text-xs font-medium text-blue-600 hover:bg-blue-50 rounded transition"
+              title="View statistics"
+            >
+              <BarChart3 size={14} />
+              View Details
+            </button>
+          )}
         </div>
       </div>
     </div>

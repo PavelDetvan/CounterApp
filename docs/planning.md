@@ -46,6 +46,7 @@ Fully functional PWA accessible globally, usable on both mobile and desktop brow
 - Python backend (FastAPI)
 - PostgreSQL (Supabase)
 - Deployment on Render / Railway (free-tier)
+- 
 
 ---
 

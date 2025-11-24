@@ -12,6 +12,37 @@ export interface Release {
 
 export const releases: Release[] = [
   {
+    version: '2.0.0',
+    date: '2025-11-24',
+    title: 'Statistics & History Management',
+    description: 'Major update adding comprehensive analytics, detailed statistics, and full entry history management with editing capabilities.',
+    changes: {
+      added: [
+        'Counter Details modal with 3 tabs (Overview, History, Trends)',
+        'Overview tab with 8 key statistics: Total, Today, Week, Month, All-Time High, Daily Average, Total Entries, Last Activity',
+        'History tab showing complete entry history with timestamps',
+        'Edit individual entries inline with save/cancel',
+        'Delete individual entries with confirmation',
+        'Trends tab with visual progress bars',
+        'All-time high calculation (best single day)',
+        'Daily average calculation since counter creation',
+        'Growth rate and consistency metrics',
+        '"View Details" button on each counter card',
+        'Color-coded statistics cards with gradients',
+        'Real-time statistics recalculation after edits',
+        'Empty states for counters with no history',
+        'Scrollable history container for large datasets',
+      ],
+      improved: [
+        'Counter cards now show View Details button in footer',
+        'Better data visualization with progress bars',
+        'Enhanced user experience with inline editing',
+        'More comprehensive counter analytics',
+        'Responsive modal design for all screen sizes',
+      ],
+    },
+  },
+  {
     version: '1.1.0',
     date: '2024-11-15',
     title: 'Feedback System & Release Notes',

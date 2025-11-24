@@ -10,6 +10,7 @@ import CounterCard from '@/components/CounterCard';
 import CreateCounterModal from '@/components/CreateCounterModal';
 import EditCounterModal from '@/components/EditCounterModal';
 import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
+import CounterDetailsModal from '@/components/CounterDetailsModal';
 import Link from 'next/link';
 import type { Counter } from '@/types/database.types';
 
@@ -24,6 +25,7 @@ export default function DashboardPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [selectedCounter, setSelectedCounter] = useState<(Counter & { total: number; todayCount: number }) | null>(null);
   
   const { counters, loading: countersLoading, fetchCounters, incrementCounter, decrementCounter } = useCounterStore();
@@ -64,6 +66,16 @@ export default function DashboardPage() {
 
   const handleCloseDelete = () => {
     setIsDeleteDialogOpen(false);
+    setSelectedCounter(null);
+  };
+
+  const handleViewDetails = (counter: Counter & { total: number; todayCount: number }) => {
+    setSelectedCounter(counter);
+    setIsDetailsModalOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setIsDetailsModalOpen(false);
     setSelectedCounter(null);
   };
 
@@ -178,6 +190,7 @@ export default function DashboardPage() {
                 onDecrement={() => decrementCounter(counter.id, user.id)}
                 onEdit={() => handleEdit(counter)}
                 onDelete={() => handleDelete(counter)}
+                onViewDetails={() => handleViewDetails(counter)}
               />
             ))}
           </div>
@@ -206,6 +219,16 @@ export default function DashboardPage() {
         onClose={handleCloseDelete}
         counter={selectedCounter}
       />
+
+      {/* Counter Details Modal */}
+      {user && (
+        <CounterDetailsModal
+          isOpen={isDetailsModalOpen}
+          onClose={handleCloseDetails}
+          counter={selectedCounter}
+          userId={user.id}
+        />
+      )}
     </div>
   );
 }
