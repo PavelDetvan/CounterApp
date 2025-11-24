@@ -8,7 +8,11 @@ import { supabase } from '@/lib/supabase/client';
 import { LogOut, Plus, Package } from 'lucide-react';
 import CounterCard from '@/components/CounterCard';
 import CreateCounterModal from '@/components/CreateCounterModal';
+import EditCounterModal from '@/components/EditCounterModal';
+import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
+import CounterDetailsModal from '@/components/CounterDetailsModal';
 import Link from 'next/link';
+import type { Counter } from '@/types/database.types';
 
 /**
  * Dashboard Page
@@ -19,6 +23,10 @@ export default function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [selectedCounter, setSelectedCounter] = useState<(Counter & { total: number; todayCount: number }) | null>(null);
   
   const { counters, loading: countersLoading, fetchCounters, incrementCounter, decrementCounter } = useCounterStore();
 
@@ -39,6 +47,36 @@ export default function DashboardPage() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push('/');
+  };
+
+  const handleEdit = (counter: Counter & { total: number; todayCount: number }) => {
+    setSelectedCounter(counter);
+    setIsEditModalOpen(true);
+  };
+
+  const handleDelete = (counter: Counter & { total: number; todayCount: number }) => {
+    setSelectedCounter(counter);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleCloseEdit = () => {
+    setIsEditModalOpen(false);
+    setSelectedCounter(null);
+  };
+
+  const handleCloseDelete = () => {
+    setIsDeleteDialogOpen(false);
+    setSelectedCounter(null);
+  };
+
+  const handleViewDetails = (counter: Counter & { total: number; todayCount: number }) => {
+    setSelectedCounter(counter);
+    setIsDetailsModalOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setIsDetailsModalOpen(false);
+    setSelectedCounter(null);
   };
 
   // Show loading spinner while checking auth
@@ -150,8 +188,9 @@ export default function DashboardPage() {
                 counter={counter}
                 onIncrement={() => incrementCounter(counter.id, user.id)}
                 onDecrement={() => decrementCounter(counter.id, user.id)}
-                onEdit={() => console.log('Edit:', counter.id)}
-                onDelete={() => console.log('Delete:', counter.id)}
+                onEdit={() => handleEdit(counter)}
+                onDelete={() => handleDelete(counter)}
+                onViewDetails={() => handleViewDetails(counter)}
               />
             ))}
           </div>
@@ -163,6 +202,30 @@ export default function DashboardPage() {
         <CreateCounterModal
           isOpen={isCreateModalOpen}
           onClose={() => setIsCreateModalOpen(false)}
+          userId={user.id}
+        />
+      )}
+
+      {/* Edit Counter Modal */}
+      <EditCounterModal
+        isOpen={isEditModalOpen}
+        onClose={handleCloseEdit}
+        counter={selectedCounter}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <DeleteConfirmDialog
+        isOpen={isDeleteDialogOpen}
+        onClose={handleCloseDelete}
+        counter={selectedCounter}
+      />
+
+      {/* Counter Details Modal */}
+      {user && (
+        <CounterDetailsModal
+          isOpen={isDetailsModalOpen}
+          onClose={handleCloseDetails}
+          counter={selectedCounter}
           userId={user.id}
         />
       )}
